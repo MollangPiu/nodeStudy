@@ -15,12 +15,10 @@ app.listen(3000, function () {
 app.use(cors());
 
 //Database 접근
-
 const db = require('./DBconnection.js');
 console.log(db());
 // mysql 연결 설정 체크하기
 const connection = mysql.createConnection(db())
-
 connection.connect();
 
 
@@ -34,6 +32,11 @@ app.get('/get', (req, res) => {
     console.log(data);
     console.log(data.a);
     console.log(data.b);
+})
+
+app.get('/json', (req, res) => {
+    let obj = {a: 'apple', b: 'banana'};
+    res.json(obj);
 })
 
 
@@ -55,3 +58,34 @@ app.get('/con', (req, res) => {
         }
     });
 });
+
+app.get('/get2', (req, res) => {
+    let name = '배트맨';
+
+    let sql = 'SELECT * FROM STU_SCORE WHERE NAME= ?';
+    connection.query(sql, [name], (err, result, fields) => {
+        if(err) {
+            console.error('error: ', err);
+        } else {
+            console.log('Field: ', fields);
+            console.log('result: ', result);
+        }
+    })
+})
+
+app.get('/get3', (req, res) => {
+    let name = '배트맨';
+
+    let sql = 'SELECT * FROM STU_SCORE';
+    connection.query(sql, (err, result) => {
+        if(err) {
+            console.error('error: ', err);
+        } else {
+            //result에 대한 foreach
+            result.forEach((li, i) => {
+                console.log(li);
+                console.log(i);
+            })
+        }
+    })
+})
