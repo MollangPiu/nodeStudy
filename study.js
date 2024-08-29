@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 // mysql 
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 
 
@@ -39,7 +39,8 @@ app.get('/get', (req, res) => {
     console.log(data.b);
 })
 
-//axios 호출 시, mysql 연결 여부 파악하기
+
+//get 연결시 호출 확인하기
 app.get('/con', (req, res) => {
     console.log('hello');
 
