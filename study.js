@@ -15,14 +15,11 @@ app.listen(3000, function () {
 app.use(cors());
 
 //Database 접근
+
+const db = require('./DBconnection.js');
+console.log(db());
 // mysql 연결 설정 체크하기
-const connection = mysql.createConnection({
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    password: 'cyci2024',
-    database: 'mydb'
-})
+const connection = mysql.createConnection(db())
 
 connection.connect();
 
