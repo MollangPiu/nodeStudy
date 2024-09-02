@@ -100,8 +100,6 @@ app.use(express.json());
 app.post('/post2', (req, res) => {
     console.log('post2');
     console.log(req.body);
-
-
 })
 
 //값 반환하기
@@ -123,3 +121,4 @@ app.post('/post3', (req, res) => {
         }
     })
 })
+
