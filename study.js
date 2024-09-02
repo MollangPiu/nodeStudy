@@ -89,3 +89,37 @@ app.get('/get3', (req, res) => {
         }
     })
 })
+
+app.post('/post1', (req, res) => {
+    console.log('실행 확인');
+})
+
+// JSON 요청의 본문을 파싱하기 위한 미들웨어
+app.use(express.json());
+
+app.post('/post2', (req, res) => {
+    console.log('post2');
+    console.log(req.body);
+
+
+})
+
+//값 반환하기
+app.post('/post3', (req, res) => {
+    console.log('post3');
+    console.log(req.body);
+    let name = '배트맨';
+
+    let sql = 'SELECT * FROM STU_SCORE WHERE NAME= ?';
+    connection.query(sql, [name], (err, result) => {
+        if(err) {
+            console.error('error: ', err);
+        } else {
+            
+            let responseData = new Object;
+            responseData.status = 200;
+            responseData.list = result;
+            res.json(responseData);
+        }
+    })
+})
