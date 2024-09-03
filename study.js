@@ -122,3 +122,19 @@ app.post('/post3', (req, res) => {
     })
 })
 
+//heaer 적용하기
+app.post('/post/header', (req, res) => {
+    console.log('/post/header');
+    console.log(req.body);
+
+
+    console.log('header 확인')
+    // 헤더 값 가져오기
+    const authHeader = req.headers['authorization']; // 대소문자 구분 없음
+    const customHeader = req.headers['another-header']; // 다른 헤더도 이와 같이 접근 가능
+
+    console.log('Authorization 헤더:', authHeader);
+    console.log('Another-Header 헤더:', customHeader);
+
+    res.json('suc');
+})

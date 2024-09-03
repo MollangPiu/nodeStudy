@@ -45,6 +45,7 @@ let proTime = () => {
             resolve();
         }, 1000);
     })
+    
     pro.finally(() => {
         console.log('time end');
     });
