@@ -98,3 +98,41 @@ app.get('/get2', (req, res) => {
         }
     })
 })
+
+
+//post ( 보통 json으로 데이터 주고 받고, 이것을 읽어올 준비가 됨.)
+app.use(express.json());
+
+
+//get방식. post 방식
+//★ 보안 (데이터 주고받을 때,
+//개발자도 알면 안되지만 일반인보다는 좀 더 아는 위치)
+
+// 회원 정보 주고 받을 때, post.
+// select은 검색기능은 get. ( 검색속도 느리면 화나요 )
+// db에서 insert, update, delete ( 이 친구들 사용할 때, post )
+app.post('/send1', (req, res) => {
+    console.log('send');
+    let data = req.body; //post는 데이터를 body에다가 넣기 때문에.
+    let name = '배트맨';
+    console.log(data);
+    if(data != undefined && data.name != null) {
+        name = data.name;
+    }
+
+    connection.query('SELECT * FROM STU_SCORE WHERE NAME = ?', [name], (err, rows) => {
+        if(err) {
+            console.err('err: ', err);
+        }
+        else if(rows[0]) {
+            console.log(rows);
+            let responseData = new Object();
+            responseData.status = 200; //통신코드 중, 200은 성공을 의미
+            responseData.list = rows;
+            res.json(responseData);
+        }
+    })
+});
+
+//회원가입할 때, get방식 통신 ( 회원가입만 )
+//post방식 하나 그냥 똑같이 만드면 됩니다.
