@@ -36,7 +36,7 @@ function time() {
 }
 
 let proTime = () => {
-    console.log('time start');
+    console.log('time start1');
     let pro = new Promise((resolve, reject) => {
         setTimeout(function() {
             for(let i = 0; i < 10; i++) {
@@ -50,4 +50,16 @@ let proTime = () => {
         console.log('time end');
     });
 }
-proTime();
+//proTime();
+
+
+an();
+//async
+async function an() {
+    await new Promise(resolve => setTimeout(() => {
+        console.log('setTimeout12');
+        resolve();
+    }, 2000));
+
+    await console.log('start');
+}
